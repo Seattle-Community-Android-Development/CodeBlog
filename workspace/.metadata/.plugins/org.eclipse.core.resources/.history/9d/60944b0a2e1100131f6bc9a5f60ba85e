@@ -1,0 +1,71 @@
+package com.scad.codeblog.user;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+/**
+ * A account data for a user of the Code Blog blog hosting service
+ */
+@Entity
+public class User {
+	
+	/** The user id. */
+	@Id
+	private int userId;
+	
+	/** The user name. */
+	private String userName;
+	
+	/**
+	 * A no-argument Constructor for JPA/Hibernate.
+	 */
+	public User() {
+		super();
+	}
+	
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param userName the user name
+	 */
+	public User(final String userName) {
+		this.userName = userName;
+	}
+
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
+	public long getUserId() {
+		return userId;
+	}
+
+	/**
+	 * Sets the user id.
+	 *
+	 * @param userId the new user id
+	 */
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	/**
+	 * Gets the user name.
+	 *
+	 * @return the user name
+	 */
+	public String getUserName() {
+		return userName;
+	}
+
+	/**
+	 * Sets the user name.
+	 *
+	 * @param userName the new user name
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+}

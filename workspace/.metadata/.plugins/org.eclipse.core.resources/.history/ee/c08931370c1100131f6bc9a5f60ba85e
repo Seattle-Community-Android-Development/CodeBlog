@@ -1,0 +1,42 @@
+package com.scad.codeblog.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.scad.codeblog.persistence.BlogDao;
+import com.scad.codeblog.persistence.BlogDaoFactory;
+import com.scad.codeblog.persistence.BlogDaoFactoryException;
+import com.scad.codeblog.user.UserException;
+
+public class BlogDaoTest {
+	
+	private BlogDao blogDao;
+
+	@Before
+	public void setUp() throws BlogDaoFactoryException {
+		BeanFactory beanFactory = new FileSystemXmlApplicationContext("context.xml");
+		BlogDaoFactory blogDaoFactory = beanFactory.getBean("BlogDaoFactory", BlogDaoFactory.class);
+		
+		if (blogDaoFactory == null) {
+			throw new BlogDaoFactoryException("Unable to create blog dao factory!");
+		}
+		
+		this.blogDao = blogDaoFactory.getBlogDao();
+	}
+	
+	@Test
+	public void instantiationTest() throws UserException {
+		fail("Not yet implemented");
+	}
+	
+	@After
+	public void tearDown() throws UserException {
+		blogDao.close();
+		blogDao = null;
+	}
+}

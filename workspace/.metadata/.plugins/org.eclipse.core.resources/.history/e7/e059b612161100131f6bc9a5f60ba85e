@@ -1,0 +1,66 @@
+package com.scad.codeblog.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+import com.scad.codeblog.persistence.BlogDao;
+import com.scad.codeblog.persistence.BlogDaoFactory;
+import com.scad.codeblog.persistence.BlogDaoFactoryException;
+import com.scad.codeblog.user.User;
+import com.scad.codeblog.user.UserException;
+import com.scad.codeblog.user.UserManagerFactory;
+
+public class BlogDaoTest {
+	
+	private static final String testUserName = "testUserName";
+	
+	private BlogDao blogDao;
+	private User user;
+
+	@Before
+	public void setUp() throws BlogDaoFactoryException {
+		BeanFactory beanFactory = new FileSystemXmlApplicationContext("context.xml");
+		
+		BlogDaoFactory blogDaoFactory = beanFactory.getBean("BlogDaoFactory", BlogDaoFactory.class);
+		
+		if (blogDaoFactory == null) {
+			throw new BlogDaoFactoryException("Unable to create blog dao factory!");
+		}
+		
+		UserManagerFactory userManagerFactory = beanFactory.getBean("UserManagerFactory", UserManagerFactory.class);
+		
+		this.blogDao = blogDaoFactory.getBlogDao();
+		this.user = new User(testUserName);
+	}
+	
+	@Test
+	public void daoInstantiationTest() {
+		assertNotNull(this.blogDao);
+	}
+	
+	@Test
+	public void userInstantiationTest() {
+		assertNotNull(this.user);
+	}
+	
+	@Test
+	public void setUserTest() throws UserException {
+		this.blogDao.setUser(this.user);
+	}
+	
+	@Test
+	public void getUserTest() throws UserException {
+		final User retrievedUser = this.blogDao.getUser(testUserName);
+	}
+	
+	@After
+	public void tearDown() throws UserException {
+		blogDao.close();
+		blogDao = null;
+	}
+}

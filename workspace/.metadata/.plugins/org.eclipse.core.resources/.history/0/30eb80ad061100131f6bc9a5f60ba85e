@@ -1,0 +1,6 @@
+package com.scad.codeblog.persistance;
+
+public interface BlogDaoFactory {
+
+	BlogDao getBlogDao() throws DaoFactoryException;
+}

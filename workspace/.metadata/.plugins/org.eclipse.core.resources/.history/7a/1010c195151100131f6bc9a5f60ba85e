@@ -1,0 +1,51 @@
+package com.scad.codeblog.persistence;
+
+import com.scad.codeblog.user.User;
+import com.scad.codeblog.user.UserException;
+
+/**
+ * Defines the public methods of a blog dao
+ * 
+ * @author Donald Subert
+ */
+public interface BlogDao {
+
+	/**
+	 * Gets the user for a given user id.
+	 *
+	 * @param userId the user id
+	 * @return the user for the given user id
+	 * @throws UserException, indicating the user could not be retreived
+	 */
+	User getUser(long userId) throws UserException;
+	
+	/**
+	 * Persists a user
+	 *
+	 * @param user the new user
+	 * @throws UserException, indicating the user could not be persisted
+	 */
+	void setUser(User user) throws UserException;
+	
+	/**
+	 * Delete the user for a given user id.
+	 *
+	 * @param userId the user id
+	 * @throws UserException, indicating the user could not be deleted
+	 */
+	void deleteUser(long userId) throws UserException;
+	
+	/**
+	 * Deletes all users
+	 *
+	 * @throws UserException, if a complete wipe could not be accomplished
+	 */
+	void reset() throws UserException;
+	
+	/**
+	 * Close connection to the persistent data. This will cause an exception if methods are called afterward.
+	 *
+	 * @throws UserException, indicating a problem closing connections to the persistent data
+	 */
+	void close() throws UserException;
+}

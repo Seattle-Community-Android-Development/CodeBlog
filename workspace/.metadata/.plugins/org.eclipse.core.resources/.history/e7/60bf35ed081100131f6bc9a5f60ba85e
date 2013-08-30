@@ -1,0 +1,42 @@
+package com.scad.codeblog.persistance;
+
+import com.scad.codeblog.user.User;
+import com.scad.codeblog.user.UserException;
+
+public class BlogDaoHibernateImpl implements BlogDao {
+	
+	public BlogDaoHibernateImpl() throws UserException {
+		
+	}
+
+	@Override
+	public User getUser(long userId) throws UserException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setUser(User user) throws UserException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteUser(long userId) throws UserException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void reset() throws UserException {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void close() throws UserException {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,7 @@
+package com.scad.codeblog.user;
+
+public interface UserManagerFactory {
+	
+	UserManager getUserManager();
+
+}

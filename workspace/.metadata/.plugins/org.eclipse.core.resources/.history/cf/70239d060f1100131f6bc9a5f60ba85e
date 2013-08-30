@@ -1,0 +1,65 @@
+package com.scad.codeblog.persistence;
+
+import java.util.logging.Logger;
+
+import com.scad.codeblog.user.User;
+import com.scad.codeblog.user.UserException;
+
+/**
+ * An implementation of BlogDao using the Hibernate3 framework
+ */
+public class BlogDaoHibernateImpl implements BlogDao {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(BlogDaoHibernateImpl.class.getName());
+	
+	/**
+	 * Instantiates a new Hibernate3 implementation of BlogDao
+	 *
+	 * @throws UserException, indicating a problem instantiating the object
+	 */
+	public BlogDaoHibernateImpl() throws UserException {
+		super();
+	}
+
+	@Override
+	public User getUser(long userId) throws UserException {
+		
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "");
+		
+		// TODO Implement
+		return null;
+	}
+
+	@Override
+	public void setUser(User user) throws UserException {
+		
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "");
+		// TODO Implement
+
+	}
+
+	@Override
+	public void deleteUser(long userId) throws UserException {
+		
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "");
+		// TODO Implement
+
+	}
+
+	@Override
+	public void reset() throws UserException {
+		
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "");
+		// TODO Implement
+
+	}
+
+	@Override
+	public void close() throws UserException {
+		
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "");
+		// TODO Implement
+
+	}
+}

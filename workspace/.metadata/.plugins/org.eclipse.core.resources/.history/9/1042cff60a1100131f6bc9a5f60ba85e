@@ -1,0 +1,33 @@
+package com.scad.codeblog.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.scad.codeblog.persistance.BlogDao;
+import com.scad.codeblog.persistance.BlogDaoFactoryException;
+import com.scad.codeblog.user.UserException;
+
+public class BlogDaoTest {
+	
+	private BlogDao blogDao;
+
+	@Before
+	public void setUp() throws BlogDaoFactoryException {
+		// TODO: add Spring bean factory stuff here
+	}
+	
+	@Test
+	public void instantiationTest() throws UserException {
+		fail("Not yet implemented");
+	}
+	
+	@After
+	public void tearDown() throws UserException {
+		blogDao.close();
+		blogDao = null;
+	}
+
+}

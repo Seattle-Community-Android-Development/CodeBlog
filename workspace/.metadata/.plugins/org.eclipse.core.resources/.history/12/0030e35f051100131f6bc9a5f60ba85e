@@ -1,0 +1,5 @@
+package com.scad.codeblog.user;
+
+public class UserException {
+
+}

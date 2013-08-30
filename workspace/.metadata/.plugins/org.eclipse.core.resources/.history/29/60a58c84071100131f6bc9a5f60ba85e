@@ -1,0 +1,23 @@
+package com.scad.codeblog.persistance;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.scad.codeblog.user.UserException;
+
+public class BlogDaoHibernateImplFactory implements BlogDaoFactory {
+	
+	private static final Logger logger = Logger.getLogger(BlogDaoHibernateImplFactory.class.getName());
+
+	@Override
+	public BlogDao getBlogDao() throws BlogDaoFactoryException {
+		try {
+			return new BlogDaoHibernateImpl();
+		} catch (final UserException ue) {
+			final String message = ue.getMessage();
+			logger.log(Level.WARNING, message != null ? message : "", ue);
+			throw new BlogDaoFactoryException("Unable to instantiate a new BlogDaoHibernateImpl", ue);
+		}
+	}
+
+}

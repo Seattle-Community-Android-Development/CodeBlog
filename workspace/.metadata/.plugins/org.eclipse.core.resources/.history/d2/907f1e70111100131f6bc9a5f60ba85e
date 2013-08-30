@@ -1,0 +1,17 @@
+package com.scad.codeblog.user;
+
+/**
+ * A factory for creating UserManager objects.
+ * 
+ * @author Donald Subert
+ */
+public interface UserManagerFactory {
+	
+	/**
+	 * Gets the user manager.
+	 *
+	 * @return the user manager
+	 */
+	UserManager getUserManager();
+
+}

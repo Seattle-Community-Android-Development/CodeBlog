@@ -1,0 +1,16 @@
+1377818747651	Move package
+1377818767758	Delete element
+1377822658186	Move file
+1377822668590	Move file
+1377822733361	Rename package 'com.scad.codeblog.persistance'
+1377824334156	Delete element
+1377824507933	Rename type 'BlogDaoHibernateImplFactory'
+1377827334949	Rename field 'testUserName'
+1377828493111	Extract method 'setUpDao'
+1377828510392	Extract method 'setUpUser'
+1377837837111	Delete element
+1377837838929	Delete element
+1377837845472	Delete element
+1377838180336	Delete element
+1377838267939	Rename type 'User'
+1377842956386	Rename type 'UserTest'
