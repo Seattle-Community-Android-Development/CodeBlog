@@ -9,8 +9,8 @@ public class UserAccount {
 	@Id
 	private int userId;
 	private String userName;
-
-	private UserManager userManager;
+	
+	//private UserManager userManager;
 	
 	private boolean isBlogger;
 	
@@ -38,12 +38,12 @@ public class UserAccount {
 		this.userName = userName;
 	}
 
-	public void setUserManager(UserManager userManager) {
+	/*public void setUserManager(UserManager userManager) {
 
 		if (this.userManager == null) {
 			this.userManager = userManager;
 		}
-	}
+	}*/
 	
 	final public void setIsBlogger(final boolean b) {
 		this.isBlogger = b;

@@ -28,3 +28,7 @@
 1377850997435	Rename type 'AbstractUserAccount'
 1377851133125	Delete element
 1377851143071	Rename type 'Blogger'
+1377855119057	Delete element
+1377889068047	Delete element
+1377889178748	Move compilation unit
+1377889255453	Rename type 'HibernateTest'
