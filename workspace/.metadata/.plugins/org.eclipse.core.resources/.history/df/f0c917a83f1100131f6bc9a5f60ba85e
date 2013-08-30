@@ -1,0 +1,49 @@
+package com.scad.codeblog.blog;
+
+public class BlogPost {
+
+	private int id;
+	
+	private String author;
+	
+	private String heading;
+	
+	private String body;
+	
+	public BlogPost() {
+		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getHeading() {
+		return heading;
+	}
+
+	public void setHeading(String heading) {
+		this.heading = heading;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+}

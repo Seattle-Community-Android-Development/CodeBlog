@@ -14,3 +14,17 @@
 1377838180336	Delete element
 1377838267939	Rename type 'User'
 1377842956386	Rename type 'UserTest'
+1377846212807	Rename method 'setAuthor'
+1377846398410	Rename field 'TEST_BLOG_POST_AUTHOR'
+1377846450584	Rename field 'id'
+1377846515139	Rename method 'getId'
+1377846519422	Rename method 'setId'
+1377846556439	Rename field 'blogDate'
+1377846565971	Rename method 'getBlogDate'
+1377846946546	Rename field 'TEST_BLOG_ID'
+1377846967478	Rename field 'TEST_BLOG_HEADLINE'
+1377850874090	Rename type 'AbstractUser'
+1377850939668	Rename type 'UserAccount'
+1377850997435	Rename type 'AbstractUserAccount'
+1377851133125	Delete element
+1377851143071	Rename type 'Blogger'

@@ -13,6 +13,8 @@ public class UserAccountTest {
 
 	private static final String TEST_USER_NAME = "TEST_USER_NAME";
 	
+	private static final boolean TEST_IS_BLOGGER = true;
+	
 	private UserAccount userAccount;
 	
 	@Before
@@ -42,4 +44,18 @@ public class UserAccountTest {
 		assertEquals(TEST_USER_NAME, this.userAccount.getUserName());
 	}
 
+	@Test
+	public void setUserManagerTest() {
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void setIsBloggerTest() {
+		this.userAccount.setIsBlogger(TEST_IS_BLOGGER);
+	}
+	
+	@Test
+	public void isBloggerTest() {
+		assertEquals(TEST_IS_BLOGGER, this.userAccount.isBlogger());
+	}
 }

@@ -1,0 +1,39 @@
+package com.scad.codeblog.test;
+
+import static org.junit.Assert.*;
+
+import java.util.Date;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.scad.codeblog.blog.BlogPost;
+
+public class BlogPostTest {
+	
+	private static final int TEST_BLOG_POST_AUTHOR = 1;
+	private static final String TEST_BLOG_POST_HEADLINE = "TEST_BLOG_POST_HEADLINE";
+	private static final String TEST_BLOG_POST_BODY = "TEST_BLOG_POST_BODY";
+	private static final Date TEST_BLOG_POST_DATE = new Date();
+
+	private BlogPost blogPost;
+	
+	@Before
+	public void setUp() {
+		this.blogPost = new BlogPost();
+		this.blogPost.setHeadline(TEST_BLOG_POST_HEADLINE);
+		this.blogPost.setBody(TEST_BLOG_POST_HEADLINE);
+	}
+	
+	@Test
+	public void instantiationTest() {
+		assertNotNull(this.blogPost);
+	}
+	
+	@After
+	public void after() {
+		
+	}
+
+}

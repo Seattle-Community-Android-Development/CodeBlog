@@ -1,0 +1,30 @@
+package com.scad.codeblog.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.scad.codeblog.blog.BlogPost;
+
+public class BlogPostTest {
+
+	private BlogPost blogPost;
+	
+	@Before
+	public void setUp() {
+		
+	}
+	
+	@Test
+	public void instantiationTest() {
+		assertNotNull(this.blogPost);
+	}
+	
+	@After
+	public void after() {
+		
+	}
+
+}

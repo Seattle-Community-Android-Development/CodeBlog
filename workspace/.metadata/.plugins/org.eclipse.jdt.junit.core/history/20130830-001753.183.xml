@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BlogPostTest" project="CodeBlog" tests="11" started="11" failures="0" errors="0" ignored="0">
+  <testsuite name="com.scad.codeblog.test.BlogPostTest" time="0.001">
+    <testcase name="instantiationTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="setBlogIdTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="setPostingDateTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="setBodyTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="getBodyTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="setAuthorIdTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="setHeadlineTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="getBlogIdTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="getPostingDateTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="getAuthorIdTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+    <testcase name="getHeadlineTest" classname="com.scad.codeblog.test.BlogPostTest" time="0.0"/>
+  </testsuite>
+</testrun>

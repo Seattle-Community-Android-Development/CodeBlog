@@ -1,0 +1,6 @@
+package com.scad.codeblog.user;
+
+public abstract class AbstractUser {
+	
+	public abstract boolean isBlogger();
+}
