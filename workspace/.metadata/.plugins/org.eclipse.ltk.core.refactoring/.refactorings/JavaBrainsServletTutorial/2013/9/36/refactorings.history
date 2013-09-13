@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SimpleServlet.java&apos; to &apos;SimpleServletProject/src/org.koushik.javabrains&apos;&#x0D;&#x0A;- Original project: &apos;JavaBrainsServletTutorial&apos;&#x0D;&#x0A;- Destination element: &apos;SimpleServletProject/src/org.koushik.javabrains&apos;&#x0D;&#x0A;- Original element: &apos;org.koushik.javabrains.SimpleServlet.java&apos;" description="Copy compilation unit" destination="=SimpleServletProject/src&lt;org.koushik.javabrains" element1="/src&lt;org.koushik.javabrains{SimpleServlet.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1378512425615" units="1" version="1.0"/>
+</session>

@@ -1,5 +1,0 @@
-package com.scad.codeblog.persistance;
-
-public class BlogDaoFactoryException extends Exception {
-
-}

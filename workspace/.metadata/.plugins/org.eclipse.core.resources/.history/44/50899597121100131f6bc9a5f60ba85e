@@ -1,7 +1,0 @@
-package com.scad.codeblog.user;
-
-public interface UserManager {
-	
-	User createUser
-	
-}

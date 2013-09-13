@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Fri Sep 13 11:34:40 PDT 2013
+org.eclipse.jst.jee.server\:JavaBrainsServletTutoria=C\:\\Java\\apache-tomcat-7.0.42\\wtpwebapps\\JavaBrainsServletTutoria
+org.eclipse.jst.jee.server\:CodeBlogJSP=C\:\\Java\\apache-tomcat-7.0.42\\wtpwebapps\\CodeBlogJSP
+org.eclipse.jst.jee.server\:SimpleServletProject=C\:\\Java\\apache-tomcat-7.0.42\\wtpwebapps\\SimpleServletProject

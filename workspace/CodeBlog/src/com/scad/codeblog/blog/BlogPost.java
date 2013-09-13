@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class BlogPost {
 
-	private int blogId;
+	private int blogId; // this may not be necessary, if we are using object relational structure
 
 	private Date postingDate;
 
-	private int authorId;
+	private int authorId; // this may not be necessary, if we are using object relational structure
 
 	private String headline;
 

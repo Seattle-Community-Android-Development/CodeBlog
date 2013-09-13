@@ -1,0 +1,7 @@
+package org.koushik.javabrains;
+
+import javax.servlet.http.HttpServlet;
+
+public class XmlServlet extends HttpServlet {
+
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<project name="jspbook" default="build" basedir=".">
+	<target name="build">
+		<echo>Starting Build [JSP Book - http://www.jspbook.com]</echo>
+		<!--Turn Tomcat Off -->
+		<antcall target="tomcatOff"/>
+		<!--Compile Everything -->
+		<antcall target="compile"/>
+		<!--Turn Tomcat On -->
+		<antcall target="tomcatOn"/>
+		<echo>Build Finished [JSP Book - http://www.jspbook.com]</echo>
+	</target>
+    
+	<target name="tomcatOff">
+		<echo>Turning off Tomcat [http://www.jspbook.com]</echo>
+		<exec executable="bash" os="Mac OS X">
+			<arg value="/Applications/apache-tomcat-7.0.42/bin/shutdown.sh"/>
+		</exec>
+	</target>
+    
+    <target name="tomcatOn">
+		<echo>Turning on Tomcat [http://www.jspbook.com]</echo>
+		<exec executable="bash" os="Mac OS X">
+			<arg value="/Applications/apache-tomcat-7.0.42/bin/startup.sh"/>
+		</exec>
+	</target>
+    
+	<target name="compile">
+		<echo>Compiling Site</echo>
+		<javac
+			srcdir="WEB-INF/classes"
+			extdirs="WEB-INF/lib:../../common/lib"
+			classpath="../..common/lib.servlet.jar"
+			deprecation="yes"
+			verbose="no">
+            <classpath>
+                <pathelement path="${javax.servlet.*}"/>
+                <pathelement location="/Users/toddfrisch/glassfish4/glassfish/lib/javaee.jar"/>
+            </classpath>
+			<include name="com/jspbook/**"/>
+		</javac>
+	</target>
+</project>
+
+

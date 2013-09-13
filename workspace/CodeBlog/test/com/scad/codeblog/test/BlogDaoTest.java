@@ -71,17 +71,34 @@ public class BlogDaoTest {
 
 	@Test
 	public void getUserTest() throws UserException {
-		final UserAccount retrievedUser = this.blogDao.getUser(TEST_USER_NAME);
-		
-		assertNotNull(retrievedUser); // TODO: remove later
-		
+		final UserAccount retrievedUser = this.blogDao.getUser(TEST_USER_ID);
+
 		assertEquals(TEST_USER_NAME, retrievedUser.getUserName());
 	}
 
-	@After
-	public void tearDown() throws UserException {
+	@Test
+	public void deleteUserTest() throws UserException {
+		this.blogDao.deleteUser(TEST_USER_ID);
+
+		// TODO: find a way to verify that it is gone.
+		// currently this just checks for errors
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void closeTest() throws UserException {
 		this.blogDao.close();
-		this.blogDao = null;
-		this.user = null;
+
+		this.blogDao.setUser(user);
+	}
+
+	@After
+	public void tearDown() {
+		try {
+			this.blogDao.close();
+			this.blogDao = null;
+			this.user = null;
+		} catch (final UserException ue) {
+			// Ignore exceptions
+		}
 	}
 }

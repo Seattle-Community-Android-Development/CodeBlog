@@ -16,7 +16,7 @@ public class TrivialHibernateTestApp {
 
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.save(user);
+		session.saveOrUpdate(user);
 		session.getTransaction().commit();
 	}
 }
