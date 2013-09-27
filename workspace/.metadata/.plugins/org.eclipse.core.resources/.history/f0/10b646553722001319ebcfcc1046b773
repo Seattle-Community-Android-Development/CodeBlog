@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>CodeBlog</h1>
+	<h3>Where Coders go to Blog</h3>
+
+	<br>
+
+	<h5>Blogger Links:</h5>
+
+	<p>
+		<a href="http://localhost:4780/CodeBlog/feed.jsp?bloggerId=1">TestBlogger
+			01</a>
+	</p>
+
+	<p>
+		<a href="http://localhost:4780/CodeBlog/feed.jsp?bloggerId=2">TestBlogger
+			02</a>
+	</p>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+package com.helo478.codeblog.util;
+
+public class StringConstants {
+
+	private StringConstants() {
+	}
+
+	public static final String KEY_USER_NAME = "USER_NAME";
+	public static final String KEY_PASSWORD = "PASSWORD";
+	public static final String KEY_USER_MANAGER = "USER_MANAGER";
+	public static final String KEY_BLOGGER_NAME = "BLOGGER_NAME";
+	public static final String KEY_ACTIVE_USER = "ACTIVE_USER";
+}

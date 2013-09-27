@@ -1,0 +1,59 @@
+package org.javabrains.webmvc;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.javabrains.webmvc.dto.User;
+import org.javabrains.webmvc.service.LoginService;
+
+import com.helo478.codeblog.user.UserManager;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		final String userName = request.getParameter("userName");
+		final String password = request.getParameter("password");
+
+		UserManager userManager = (UserManager) request.getServletContext().getAttribute("userManager");
+		
+		userManager.loginUser(userName, null); // TODO: add password handling
+
+		if () {
+			final User user = loginService.getUser(userName);
+
+			// This is the way to do client-side redirect
+			// It has been replaced by the request dispatcher
+
+			// * request.getSession().setAttribute("user", user);
+			// * response.sendRedirect("success.jsp");
+
+			// This is the way to do server side redirect
+			request.setAttribute("user", user);
+			RequestDispatcher requestDispatcher = request
+					.getRequestDispatcher("form.jsp");
+			requestDispatcher.forward(request, response);
+
+			return;
+		} else {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+	}
+
+}

@@ -3,4 +3,6 @@
   <module moduleId="org.eclipse.jst.jee.server:JavaBrainsServletTutoria" serverId="Tomcat v7.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:SimpleServletProject" serverId="Tomcat v7.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.jee.server:CodeBlogJSP" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:JavaBrainsWebMVC" serverId="Tomcat v7.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:CodeBlogFromTemplate" serverId="Tomcat v7.0 Server at localhost"/>
 </modules>

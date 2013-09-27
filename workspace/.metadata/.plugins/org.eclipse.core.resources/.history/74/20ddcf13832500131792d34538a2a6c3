@@ -1,0 +1,87 @@
+package com.helo478.codeblog.web;
+
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.helo478.codeblog.user.InvalidUserException;
+import com.helo478.codeblog.user.UserAccount;
+import com.helo478.codeblog.user.UserManager;
+import com.helo478.codeblog.user.UserManagerException;
+import com.helo478.codeblog.util.StringConstants;
+
+/**
+ * Servlet implementation class CreateAccountServlet
+ */
+@WebServlet("/CreateAccountServlet")
+public class CreateAccountServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = Logger
+			.getLogger(CreateAccountServlet.class.getName());
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException,
+			IOException {
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(CreateAccountServlet.class.getName());
+			enteringLog
+					.append(".doPost(HttpServletRequest request, HttpServletResponse response) for request: \"");
+			enteringLog.append(request.toString());
+			enteringLog.append("\" and response: \"");
+			enteringLog.append(response.toString());
+			enteringLog.append("\"");
+		}
+
+		final UserManager userManager = (UserManager) request
+				.getServletContext().getAttribute(
+						StringConstants.KEY_USER_MANAGER);
+
+		final String userName = request
+				.getParameter(StringConstants.KEY_USER_NAME);
+		final String password = request
+				.getParameter(StringConstants.KEY_PASSWORD);
+		final byte[] passwordHash = null; // TODO implement password
+		
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer valuesLog = new StringBuffer();
+			valuesLog.append(userManager);
+			valuesLog.append(userName);
+			valuesLog.append(passwordHash);
+			
+			logger.info(valuesLog.toString());
+		}
+
+		try {
+			UserAccount newUser = userManager
+					.createUser(userName, passwordHash);
+
+			request.getSession().setAttribute(StringConstants.KEY_ACTIVE_USER,
+					newUser);
+			response.sendRedirect(StringConstants.PAGE_FORM);
+
+		} catch (final InvalidUserException iue) {
+			final StringBuffer iueMessage = new StringBuffer();
+			iueMessage.append("User Name already in use: ");
+			iueMessage.append(userName);
+
+			logger.warning(iueMessage.toString());
+		} catch (final UserManagerException ume) {
+			final String message = ume.getMessage();
+			logger.log(Level.WARNING, message != null ? message : "", ume);
+		}
+	}
+}

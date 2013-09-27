@@ -1,0 +1,8 @@
+package com.helo478.codeblog.user;
+
+public class InvalidPasswordException extends Exception {
+
+	public InvalidPasswordException() {
+		super();
+	}
+}

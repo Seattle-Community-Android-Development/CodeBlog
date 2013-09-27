@@ -1,0 +1,5 @@
+package com.helo478.codeblog.util;
+
+public class HibernateConstants {
+
+}

@@ -1,0 +1,24 @@
+package com.helo478.codeblog.test;
+
+import java.util.Date;
+
+public class HibernateTest {
+	
+	private static final Date blogPostingDate = new Date();
+	
+	private static final String blogHeadline = "HEADLINE";
+	
+	private static final String blogBody = "This is the body of the test blog";
+	
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		
+		
+		
+	}
+
+}

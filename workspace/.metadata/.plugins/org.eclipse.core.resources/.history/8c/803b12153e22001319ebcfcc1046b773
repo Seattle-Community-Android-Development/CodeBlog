@@ -1,0 +1,33 @@
+package com.helo478.codeblog.test;
+
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.helo478.codeblog.user.UserAccount;
+
+public class HibernateLoadTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		SessionFactory sessionFactory = new Configuration().configure(
+				"hibernate.cfg.xml").buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		/* session.get(UserAccount.class, 1); */
+
+		org.hibernate.Query query = session.getNamedQuery("UserAccount.byName");
+		query.setString(0, "Test User");
+		List<UserAccount> list = (List<UserAccount>) query.list();
+		session.getTransaction().commit();
+		session.close();
+
+		System.out.println("list.size() == " + list.size());
+
+		System.out.println("UserAccount == " + list.get(0).toString());
+	}
+
+}

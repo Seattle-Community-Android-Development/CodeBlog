@@ -1,0 +1,13 @@
+package com.helo478.codeblog.test;
+
+public class HibernateLoadTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

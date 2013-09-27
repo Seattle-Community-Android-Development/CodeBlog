@@ -1,0 +1,39 @@
+package com.helo478.codeblog.web;
+
+import java.io.IOException;
+import java.util.logging.Logger;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.helo478.codeblog.user.UserManager;
+import com.helo478.codeblog.util.StringConstants;
+
+/**
+ * Servlet implementation class CreateAccountServlet
+ */
+@WebServlet("/CreateAccountServlet")
+public class CreateAccountServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = Logger
+			.getLogger(CreateAccountServlet.class.getName());
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		final UserManager userManager = (UserManager) request.getServletContext().getAttribute(StringConstants.KEY_USER_MANAGER);
+		
+		final String userName = request.getParameter(StringConstants.KEY_USER_NAME);
+		final String password = request.getParameter(StringConstants.KEY_PASSWORD);
+		final Byte[] passwordHash = null; // TODO implement
+	}
+
+}

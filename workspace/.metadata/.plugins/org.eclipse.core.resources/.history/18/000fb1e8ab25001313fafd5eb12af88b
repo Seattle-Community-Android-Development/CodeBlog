@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"
+	import="com.helo478.codeblog.user.UserManager, 
+	com.helo478.codeblog.user.UserAccount, 
+	com.helo478.codeblog.util.ServletConstants, 
+	org.springframework.beans.factory.BeanFactory, 
+	org.springframework.context.support.ClassPathXmlApplicationContext"
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Home</title>
+</head>
+<body>
+
+	<%!public void jspInit() {
+		
+		// TODO: do I need to accept the configuration parameters here?
+				
+				
+		final ServletContext context = getServletContext();
+		
+		final BeanFactory attributeBeanFactory = (BeanFactory) context.getAttribute(ServletConstants.ATTRIBUTE_BEAN_FACTORY);
+				
+		final Object attributeUserManager = context.getAttribute(ServletConstants.ATTRIBUTE_USER_MANAGER);
+		
+		if (attributeUserManager == null) {
+			final BeanFactory beanFactory = new ClassPathXmlApplicationContext("springContext.xml");
+			final UserManager newUserManager = beanFactory.getBean(UserManager.class);
+			
+			// add the userManager singleton to the servletContext
+			context.setAttribute(ServletConstants.ATTRIBUTE_USER_MANAGER, newUserManager);
+		}
+	}%>
+	
+	<%
+		final UserManager userManager = (UserManager) request
+				.getServletContext().getAttribute("userManager");
+	%>
+
+</body>
+</html>

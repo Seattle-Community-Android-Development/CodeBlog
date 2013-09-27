@@ -1,0 +1,54 @@
+package org.javabrains.webmvc;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.javabrains.webmvc.dto.User;
+import org.javabrains.webmvc.service.LoginService;
+
+import com.helo478.codeblog.user.InvalidPasswordException;
+import com.helo478.codeblog.user.InvalidUserException;
+import com.helo478.codeblog.user.UserAccount;
+import com.helo478.codeblog.user.UserManager;
+import com.helo478.codeblog.user.UserManagerException;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		final String userName = request.getParameter("userName");
+		final String password = request.getParameter("password");
+
+		final UserManager userManager = (UserManager) request
+				.getServletContext().getAttribute("userManager");
+
+		try {
+			UserAccount activeUser = userManager.loginUser(userName, null);
+			// TODO: add password handling
+
+			request.getSession().setAttribute("activeUser", activeUser);
+			response.sendRedirect("form.jsp");
+		} catch (final InvalidUserException iue) {
+			// TODO: handle
+		} catch (final InvalidPasswordException ipe) {
+			// TODO: handle
+		} catch (final UserManagerException ume) {
+			// TODO: handle
+		}
+	}
+}

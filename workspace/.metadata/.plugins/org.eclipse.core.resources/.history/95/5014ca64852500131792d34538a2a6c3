@@ -1,0 +1,265 @@
+package com.helo478.codeblog.persistence;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.helo478.codeblog.user.InvalidUserException;
+import com.helo478.codeblog.user.UserAccount;
+import com.helo478.codeblog.user.UserException;
+import com.helo478.codeblog.util.HibernateConstants;
+
+/**
+ * An implementation of BlogDao using the Hibernate3 framework
+ */
+public class BlogDaoHibernateImpl implements BlogDao {
+
+	/** The Constant logger. */
+	private static final Logger logger = Logger
+			.getLogger(BlogDaoHibernateImpl.class.getName());
+
+	private SessionFactory sessionFactory;
+
+	/**
+	 * Instantiates a new Hibernate3 implementation of BlogDao
+	 * 
+	 * @throws UserException
+	 *             , indicating a problem instantiating the object
+	 */
+	public BlogDaoHibernateImpl() {
+
+		if (logger.isLoggable(Level.FINE)) {
+			logger.entering(BlogDaoHibernateImpl.class.getName(), "INIT()");
+		}
+
+		this.sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+	}
+
+	@Override
+	public UserAccount getUserByName(final String userName)
+			throws InvalidUserException {
+
+		if (logger.isLoggable(Level.INFO)) {
+
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(BlogDaoHibernateImpl.class.getName());
+			enteringLog
+					.append(".getUserByName(String userName), for userName: \"");
+			enteringLog.append(userName);
+			enteringLog.append("\"");
+
+			logger.info(enteringLog.toString());
+		}
+
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.getNamedQuery("UserAccount.byName");
+		query.setString(
+				HibernateConstants.NAMED_QUERY_USER_ACCOUNT_BY_NAME_COL_NAME,
+				userName);
+
+		@SuppressWarnings("unchecked")
+		List<UserAccount> list = (List<UserAccount>) query.list();
+
+		session.close();
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer infoMessage = new StringBuffer();
+			infoMessage.append("The number of query results is: ");
+			infoMessage.append(list.size());
+
+			logger.info(infoMessage.toString());
+		}
+
+		if (list.size() == 1) {
+			return list.get(0);
+		} else {
+			throw new InvalidUserException();
+		}
+	}
+
+	@Override
+	public UserAccount getUserById(final int userId) throws UserException {
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(BlogDaoHibernateImpl.class.getName());
+			enteringLog.append(".getUserById(int userId), for userId: \"");
+			enteringLog.append(String.valueOf((userId)));
+			enteringLog.append("\"");
+
+			logger.info(enteringLog.toString());
+		}
+
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		UserAccount retrievedUser = (UserAccount) session.get(
+				UserAccount.class, userId);
+
+		session.close();
+
+		if (retrievedUser == null) {
+			throw new UserException("Unable to get user for userId: " + userId);
+		}
+
+		return retrievedUser;
+	}
+
+	@Override
+	public void setUser(final UserAccount user) throws UserException {
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(BlogDaoHibernateImpl.class.getName());
+			enteringLog.append(".setUser(UserAccount user), for user: \"");
+			enteringLog.append(user);
+			enteringLog.append("\"");
+
+			logger.info(enteringLog.toString());
+		}
+
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(user);
+			session.getTransaction().commit();
+		} catch (final Exception e) {
+
+			final StringBuffer message = new StringBuffer();
+			message.append("Unable to persist user: \"");
+			message.append(user);
+			message.append("\" due to exception e.getMessage(): \"");
+			message.append(e.getMessage());
+			message.append("\nRolling Back Transaction");
+
+			logger.log(Level.WARNING, message.toString(), e);
+			transaction.rollback();
+
+			throw new UserException(message.toString(), e);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void renameUser(final UserAccount user, final String newUserName) {
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(BlogDaoHibernateImpl.class.getName());
+			enteringLog
+					.append(".renameUser(UserAccount user, String newUserName); for user: \"");
+			enteringLog.append(user);
+			enteringLog.append("\" and newUserName: \"");
+			enteringLog.append(newUserName);
+			enteringLog.append("\"");
+
+			logger.info(enteringLog.toString());
+		}
+
+		checkInvariants();
+
+		// TODO: Implement
+	}
+
+	@Override
+	public void deleteUser(final int userId) throws UserException {
+
+		if (logger.isLoggable(Level.INFO)) {
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering ");
+			enteringLog.append(BlogDaoHibernateImpl.class.getName());
+			enteringLog.append(".deleteUser(int userId); for userId: \"");
+			enteringLog.append(String.valueOf(userId));
+			enteringLog.append("\"");
+
+			logger.info(enteringLog.toString());
+		}
+
+		checkInvariants();
+
+		final UserAccount userToDelete = this.getUserById(userId);
+
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.delete(userToDelete);
+			session.getTransaction().commit();
+		} catch (final Exception e) {
+
+			final StringBuffer message = new StringBuffer();
+			message.append("Unable to delete user for userId: \"");
+			message.append(String.valueOf(userId));
+			message.append("\" due to exception e.getMessage(): \"");
+			message.append(e.getMessage());
+			message.append("\nRolling Back Transaction");
+
+			logger.log(Level.WARNING, message.toString(), e);
+
+			transaction.rollback();
+
+			throw new UserException(message.toString(), e);
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void reset() throws UserException {
+
+		if (logger.isLoggable(Level.FINE)) {
+			logger.entering(BlogDaoHibernateImpl.class.getName(), "reset()");
+		}
+
+		checkInvariants();
+
+		// TODO Implement
+	}
+
+	@Override
+	public void close() throws UserException {
+
+		if (logger.isLoggable(Level.FINE)) {
+			logger.entering(BlogDaoHibernateImpl.class.getName(), "close()");
+		}
+
+		checkInvariants();
+
+		// TODO: release JDBC driver? or does sessionFactory.close() do this for
+		// us?
+
+		sessionFactory.close();
+		sessionFactory = null;
+	}
+
+	/**
+	 * Checks that state variables have been initialized and not closed.
+	 */
+	private void checkInvariants() {
+		if (sessionFactory == null || sessionFactory.isClosed()) {
+			throw new IllegalStateException(String.format(
+					"A field has not been initialized, or the data connection has been closed."
+							+ "sessionFactory == %s", sessionFactory));
+		}
+	}
+}

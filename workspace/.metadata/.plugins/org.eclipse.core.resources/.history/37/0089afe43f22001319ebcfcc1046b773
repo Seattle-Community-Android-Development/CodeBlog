@@ -1,0 +1,9 @@
+package com.helo478.codeblog.user;
+
+public class InvalidUserException extends Exception {
+
+	public InvalidUserException() {
+		super();
+	}
+	
+}

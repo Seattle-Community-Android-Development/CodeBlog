@@ -13,15 +13,15 @@
     
 	<target name="tomcatOff">
 		<echo>Turning off Tomcat [http://www.jspbook.com]</echo>
-		<exec executable="bash" os="Mac OS X">
-			<arg value="/Applications/apache-tomcat-7.0.42/bin/shutdown.sh"/>
+		<exec executable="cmd" >
+			<arg value="C://Java/apache-tomcat-7.0.42/bin/shutdown.bat"/>
 		</exec>
 	</target>
     
     <target name="tomcatOn">
 		<echo>Turning on Tomcat [http://www.jspbook.com]</echo>
-		<exec executable="bash" os="Mac OS X">
-			<arg value="/Applications/apache-tomcat-7.0.42/bin/startup.sh"/>
+		<exec executable="cmd">
+			<arg value="/Applications/apache-tomcat-7.0.42/bin/startup.bat"/>
 		</exec>
 	</target>
     

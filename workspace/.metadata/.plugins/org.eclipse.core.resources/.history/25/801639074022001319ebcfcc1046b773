@@ -1,0 +1,14 @@
+package com.helo478.codeblog.user;
+
+public class InvalidUserException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7946453113457920323L;
+
+	public InvalidUserException() {
+		super();
+	}
+	
+}

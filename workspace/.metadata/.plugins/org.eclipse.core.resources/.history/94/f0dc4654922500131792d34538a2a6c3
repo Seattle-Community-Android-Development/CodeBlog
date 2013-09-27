@@ -1,0 +1,15 @@
+package com.helo478.codeblog.util;
+
+public class ServletConstants {
+
+	private ServletConstants() {}
+	
+	public static final String ATTRIBUTE_BEAN_FACTORY = "BEAN_FACTORY";
+
+
+	public static final String ATTRIBUTE_USER_NAME = "USER_NAME";
+	public static final String ATTRIBUTE_PASSWORD = "PASSWORD";
+	public static final String KEY_USER_MANAGER = "USER_MANAGER";
+	public static final String KEY_BLOGGER_NAME = "BLOGGER_NAME";
+	public static final String KEY_ACTIVE_USER = "ACTIVE_USER";
+}

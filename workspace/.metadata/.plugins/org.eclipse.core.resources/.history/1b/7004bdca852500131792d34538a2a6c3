@@ -1,0 +1,100 @@
+package com.helo478.codeblog.user;
+
+import com.helo478.codeblog.blog.BlogFeed;
+
+/**
+ * The Interface UserManager.
+ * 
+ * @author Donald Subert
+ */
+public interface UserManager {
+
+	/**
+	 * Creates the user.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param passwordHash
+	 *            the password hash
+	 * @return the user account
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 */
+	UserAccount createUser(String userName, byte[] passwordHash)
+			throws UserManagerException, InvalidUserException;
+
+	/**
+	 * Login user.
+	 * 
+	 * @param userName
+	 *            the user name
+	 * @param passwordHash
+	 *            the password hash
+	 * @return the user account
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 * @throws InvalidUserException, InvalidPasswordException 
+	 */
+	UserAccount loginUser(String userName, byte[] passwordHash)
+			throws UserManagerException, InvalidUserException, InvalidPasswordException;
+
+	/**
+	 * Persist user.
+	 * 
+	 * @param userAccount
+	 *            the user to persist
+	 * @throws UserManagerException
+	 *             indicates a problem persisting the user
+	 */
+	void persistUser(UserAccount userAccount) throws UserManagerException;
+
+	/**
+	 * Change password.
+	 * 
+	 * @param userAccount
+	 *            the user account whose password is to change
+	 * @param newPasswordHash
+	 *            the new password hash
+	 * @return true, if successful
+	 */
+	boolean changePassword(UserAccount userAccount, byte[] oldPasswordHash,
+			byte[] newPasswordHash) throws InvalidPasswordException;
+
+	/**
+	 * Delete user.
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 */
+	void deleteUser(int userId) throws UserManagerException;
+
+	/**
+	 * Gets a read-only version of the UserAccount data
+	 * 
+	 * @param userId
+	 *            the user id
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 * @throws InvalidUserException 
+	 */
+	BlogFeed getFeed(String userName) throws UserManagerException, InvalidUserException;
+
+	/**
+	 * Reset.
+	 * 
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 */
+	void reset() throws UserManagerException;
+
+	/**
+	 * Close.
+	 * 
+	 * @throws UserManagerException
+	 *             the user manager exception
+	 */
+	void close() throws UserManagerException;
+
+}

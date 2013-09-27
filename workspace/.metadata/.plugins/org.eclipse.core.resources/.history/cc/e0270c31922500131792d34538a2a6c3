@@ -1,0 +1,8 @@
+package com.helo478.codeblog.util;
+
+public class ServletConstants {
+
+	private ServletConstants() {}
+	
+	public static final String ATTRIBUTE_BEAN_FACTORY = "BEAN_FACTORY";
+}

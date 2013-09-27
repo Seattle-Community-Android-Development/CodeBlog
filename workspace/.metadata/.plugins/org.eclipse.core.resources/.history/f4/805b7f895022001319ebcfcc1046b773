@@ -1,0 +1,197 @@
+package com.helo478.codeblog.persistence;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.helo478.codeblog.user.InvalidUserException;
+import com.helo478.codeblog.user.UserAccount;
+import com.helo478.codeblog.user.UserException;
+
+/**
+ * An implementation of BlogDao using the Hibernate3 framework
+ */
+public class BlogDaoHibernateImpl implements BlogDao {
+
+	/** The Constant logger. */
+	private static final Logger logger = Logger
+			.getLogger(BlogDaoHibernateImpl.class.getName());
+
+	private SessionFactory sessionFactory;
+
+	/**
+	 * Instantiates a new Hibernate3 implementation of BlogDao
+	 * 
+	 * @throws UserException
+	 *             , indicating a problem instantiating the object
+	 */
+	public BlogDaoHibernateImpl() {
+		this.sessionFactory = new Configuration().configure()
+				.buildSessionFactory();
+	}
+
+	@Override
+	public UserAccount getUserByName(final String userName) throws InvalidUserException {
+
+		if (logger.isLoggable(Level.INFO)) {
+			
+			final StringBuffer enteringLog = new StringBuffer();
+			enteringLog.append("Entering BlogDaoHibernateImpl.getUserByName(String userName), where userName == ");
+			enteringLog.append(userName);
+			
+			logger.log(Level.INFO, enteringLog.toString());
+		}
+		
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Query query = session.getNamedQuery("UserAccount.byName");
+		query.setString(0, "userName");
+		List<UserAccount> list = (List<UserAccount>) query.list();
+		
+		session.close();
+
+		if (list.size() == 1) {
+			return list.get(0);
+		} else {
+			throw new InvalidUserException();
+		}
+	}
+
+	@Override
+	public UserAccount getUserById(final int userId) throws UserException {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "getUser()");
+
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		UserAccount retrievedUser = (UserAccount) session.get(
+				UserAccount.class, 1); // TODO: fix this later
+
+		session.close();
+
+		if (retrievedUser == null) {
+			throw new UserException("Unable to get user for userId: " + userId);
+		}
+
+		return retrievedUser;
+
+	}
+
+	@Override
+	public void setUser(final UserAccount user) throws UserException {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "setUser()");
+
+		checkInvariants();
+
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(user);
+			session.getTransaction().commit();
+		} catch (final Exception e) {
+			// TODO: add logging
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public void renameUser(final UserAccount user, final String newUserName) {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "renameUser()");
+
+		checkInvariants();
+
+		// TODO: Implement
+	}
+
+	@Override
+	public void deleteUser(final int userId) throws UserException {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "deleteUser()");
+
+		try {
+			checkInvariants();
+		} catch (IllegalStateException ise) {
+			final String message = ise.getMessage();
+			logger.log(Level.WARNING, message != null ? message : "", ise);
+			throw new UserException("Unable to delete user for id: " + userId,
+					ise);
+		} // TODO: do i need to catch this?
+
+		final UserAccount userToDelete = this.getUserById(userId);
+
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		try {
+			session.delete(userToDelete);
+			session.getTransaction().commit();
+		} catch (final Exception e) {
+			// TODO: add logging
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+
+		// TODO: wrap the hibernate exception in a user exception
+	}
+
+	@Override
+	public void reset() throws UserException {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "reset()");
+
+		checkInvariants();
+
+		// TODO Implement
+	}
+
+	@Override
+	public void close() throws UserException {
+
+		logger.entering(BlogDaoHibernateImpl.class.getName(), "close()");
+
+		try {
+			checkInvariants();
+
+			// TODO: unregister the jdbc driver
+
+		} catch (final IllegalStateException ise) {
+			final String message = ise.getMessage();
+			logger.log(Level.WARNING, message != null ? message : "", ise);
+			throw new UserException("Unable to close data connection", ise);
+		}
+
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.disconnect();
+
+		sessionFactory = null;
+	}
+
+	/**
+	 * Checks that state variables have been initialized and not closed.
+	 */
+	private void checkInvariants() {
+		if (sessionFactory == null || sessionFactory.isClosed()) {
+			throw new IllegalStateException(String.format(
+					"A field has not been initialized, or the data connection has been closed."
+							+ "sessionFactory == %s", sessionFactory));
+		}
+	}
+}
